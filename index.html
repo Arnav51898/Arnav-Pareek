@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arnav Pareek — Cinematic Aviation</title>
+  <meta name="description" content="Cinematic aviation portfolio for Arnav Pareek." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Atmosphere layers -->
+  <div class="bg" aria-hidden="true">
+    <div class="sky-gradient"></div>
+    <div class="sun-glow"></div>
+    <div class="haze"></div>
+
+    <div class="cloud-layer layer-far">
+      <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span>
+    </div>
+    <div class="cloud-layer layer-mid">
+      <span class="cloud c4"></span><span class="cloud c5"></span><span class="cloud c6"></span>
+    </div>
+    <div class="cloud-layer layer-near">
+      <span class="cloud c7"></span><span class="cloud c8"></span><span class="cloud c9"></span>
+    </div>
+
+    <canvas id="particles"></canvas>
+    <div class="light-ray ray1"></div>
+    <div class="light-ray ray2"></div>
+    <div class="grain"></div>
+  </div>
+
+  <!-- Top Nav -->
+  <header class="nav glass">
+    <a href="#hero" class="brand magnetic">Arnav Pareek</a>
+    <nav>
+      <a href="#about" class="magnetic">About</a>
+      <a href="#journey" class="magnetic">Journey</a>
+      <a href="#projects" class="magnetic">Projects</a>
+      <a href="#contact" class="magnetic">Contact</a>
+    </nav>
+    <button class="audio-btn magnetic" id="audioToggle" aria-pressed="false">🔊 Engine: Off</button>
+  </header>
+
+  <!-- Flight overlay (full viewport story layer) -->
+  <div class="flight-overlay" aria-hidden="true">
+    <svg id="flightSvg" viewBox="0 0 1440 900" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="pathGlow" x1="0" x2="1">
+          <stop offset="0%" stop-color="#bde7ff" stop-opacity="0.0"/>
+          <stop offset="45%" stop-color="#bde7ff" stop-opacity="0.75"/>
+          <stop offset="100%" stop-color="#ffd0a3" stop-opacity="0.0"/>
+        </linearGradient>
+        <filter id="softBlur">
+          <feGaussianBlur stdDeviation="2" />
+        </filter>
+      </defs>
+
+      <!-- Full journey path -->
+      <path id="journeyPath"
+        d="M 120 700
+           C 260 620, 380 600, 520 540
+           C 700 460, 820 340, 960 300
+           C 1080 270, 1220 360, 1280 470
+           C 1340 590, 1240 690, 1080 640
+           C 930 590, 820 500, 700 410
+           C 560 300, 420 260, 260 210
+           C 190 190, 140 150, 110 110"
+        fill="none" />
+
+      <!-- Drawn line -->
+      <path id="pathVisible" fill="none" stroke="url(#pathGlow)" stroke-width="3.2" stroke-linecap="round" />
+      <path id="pathWideGlow" fill="none" stroke="#9fdcff" stroke-opacity=".18" stroke-width="10" filter="url(#softBlur)" />
+    </svg>
+
+    <!-- Vector aircraft (no rectangular image, no PNG/JPG aircraft) -->
+    <div id="aircraft" class="aircraft">
+      <div class="plane-shadow"></div>
+      <svg class="plane-svg" viewBox="0 0 240 120">
+        <g id="planeGroup">
+          <!-- fuselage -->
+          <rect x="38" y="52" width="132" height="16" rx="8" class="fuselage"/>
+          <ellipse cx="170" cy="60" rx="30" ry="10" class="nose"/>
+          <rect x="30" y="56" width="12" height="8" rx="4" class="tail-end"/>
+
+          <!-- wings -->
+          <polygon points="92,58 152,28 168,28 120,58" class="wing"/>
+          <polygon points="92,62 152,92 168,92 120,62" class="wing"/>
+
+          <!-- tail -->
+          <polygon points="40,56 58,38 66,38 56,56" class="tail-fin"/>
+          <polygon points="40,64 58,82 66,82 56,64" class="tail-fin"/>
+
+          <!-- cockpit glass -->
+          <ellipse cx="182" cy="58" rx="9" ry="4" class="cockpit"/>
+
+          <!-- engines -->
+          <ellipse cx="114" cy="44" rx="7" ry="4" class="engine"/>
+          <ellipse cx="114" cy="76" rx="7" ry="4" class="engine"/>
+
+          <!-- nav lights -->
+          <circle id="lightLeft" cx="165" cy="29" r="2.2" class="nav-red"/>
+          <circle id="lightRight" cx="165" cy="91" r="2.2" class="nav-green"/>
+        </g>
+      </svg>
+      <div class="sun-sweep"></div>
+    </div>
+
+    <!-- Contrail -->
+    <canvas id="contrailCanvas"></canvas>
+  </div>
+
+  <main id="mainContent">
+    <section id="hero" class="panel hero">
+      <p class="kicker reveal">CINEMATIC AVIATION EXPERIENCE</p>
+      <h1 class="reveal">Arnav Pareek<br><span>Story of a Flight</span></h1>
+      <p class="sub reveal">A premium one-page interactive journey where the aircraft is the main character.</p>
+      <div class="hero-cta reveal">
+        <a href="#about" class="btn magnetic">Start Journey</a>
+        <a href="#contact" class="btn ghost magnetic">Connect</a>
+      </div>
+    </section>
+
+    <section id="about" class="panel card glass shimmer reveal">
+      <h2>About</h2>
+      <p>Takeoff and climb through cloud layers with smooth cinematic motion and atmospheric depth.</p>
+      <div class="stats">
+        <article><h3 data-count="8">0</h3><p>Training Modules</p></article>
+        <article><h3 data-count="5">0</h3><p>Major Milestones</p></article>
+        <article><h3 data-count="100">0</h3><p>Commitment %</p></article>
+      </div>
+    </section>
+
+    <section id="journey" class="panel card glass shimmer reveal">
+      <h2>Journey</h2>
+      <div class="timeline">
+        <article class="timeline-item lift"><span></span><div><h4>Takeoff</h4><p>Building fundamentals with discipline.</p></div></article>
+        <article class="timeline-item lift"><span></span><div><h4>Climb</h4><p>Expanding technical and operational understanding.</p></div></article>
+        <article class="timeline-item lift"><span></span><div><h4>Cruise</h4><p>Maintaining consistency and precision toward goals.</p></div></article>
+      </div>
+    </section>
+
+    <section id="projects" class="panel card glass shimmer reveal">
+      <h2>Projects / Checkpoints</h2>
+      <p class="muted">Aircraft circles this section once before continuing its route.</p>
+      <div class="gallery">
+        <figure class="g tilt"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1400&auto=format&fit=crop" alt="Aviation visual"></figure>
+        <figure class="g tilt"><img src="https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?q=80&w=1400&auto=format&fit=crop" alt="Aviation visual"></figure>
+        <figure class="g tilt"><img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?q=80&w=1400&auto=format&fit=crop" alt="Aviation visual"></figure>
+      </div>
+    </section>
+
+    <section id="contact" class="panel card glass shimmer reveal">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+      <p>Instagram: <a href="#" target="_blank" rel="noreferrer">@yourhandle</a></p>
+      <p>LinkedIn: <a href="#" target="_blank" rel="noreferrer">Your LinkedIn</a></p>
+      <p class="muted">Final scene: aircraft departs into the distance.</p>
+    </section>
+  </main>
+
+  <!-- HUD -->
+  <aside class="hud glass" aria-hidden="true">
+    <div class="radar">
+      <div class="radar-ring"></div>
+      <div class="radar-ring r2"></div>
+      <div class="radar-sweep" id="radarSweep"></div>
+      <div class="radar-pulse" id="radarPulse"></div>
+    </div>
+    <div class="hud-metric"><span>ALT</span><strong id="altitude">00000</strong></div>
+    <div class="hud-metric"><span>HDG</span><strong id="heading">000°</strong></div>
+    <div class="hud-metric"><span>SPD</span><strong id="speed">000</strong></div>
+  </aside>
+
+  <footer class="glass">© <span id="year"></span> Arnav Pareek • Cinematic Aviation</footer>
+
+  <audio id="engineAudio" loop preload="none">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5f0f6d9e2e.mp3?filename=airplane-cabin-ambience-110397.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
