@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arnav51898.github.io/Arnav-Pareek/sitemap.xml
